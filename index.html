@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title> Guessing Game - Benjamin Conant</title>
+		<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+	</head>
+	<body>
+		<div class="container">
+			<header class="page-header">
+				<h1 class="text-center">Benjamin Conant's Guessing Game</h1>
+			</header>
+			<div class="jumbotron">
+				<h3 class="text-center">Enter a Guess!!</h3>
+				<h5 class="text-center"> <i>any number between 0 and 100 </i> </h5>
+				<form id="guess-form" role="form">
+					
+					<input id="user-guess" class="form-control" placeholder="a number between 0 and 100" autocomplete="off">
+				</form>
+				<a id ="submit-guess" class="btn btn-primary btn-lg btn-block" style="margin-top: 10px" href="#">Submit your guess</a>
+
+				<div class="row">
+					<div class ="col-md-6 text-center">
+					 <a id="play-again" class="btn btn-success btn-lg btn-block" style="margin-top: 10px" href="#">Play Again!</a>
+					</div>
+					<div class ="col-md-6 text-center"> 
+						<a id="hint" class="btn btn-warning btn-lg btn-block" style="margin-top: 10px" href="#">Gimme a hint ... :) </a>
+					</div>
+				</div>
+				<div>
+					<h3 id="guess-left" class="text-center"><span id="guessess-left">10</span> guesses left!</h3>
+				</div>
+				<div>
+					<h3 id="output" class="text-center"></h3>
+				</div>
+				<div>
+					<h3 id="guess-list" class="text-center"><span style="color: blue">coldest</span>----<span id="guess-list-span"></span>----<span style ="color: red">hottest</span> </h3>
+				</div>
+			</div>
+		</div>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" ></script>
+		<script type='text/javascript' src='js/jquery.js'></script>
+	</body>
+</html>
