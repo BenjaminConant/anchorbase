@@ -1,64 +1,89 @@
 $(document).ready(function(){	
-	
-	
-	$('#submit-guess').click(function(){
-		
-	});
+	var userSearchTerm = "";
+    var NYTapiKey = "bdcebec4874a5076dbaaa7f2a5f0db3b:3:70140904";
+    var NYTtimesShown = 1;
+    var NYTresultsArray = [];
+    function NYTresultsObject(url, headline, leadParagraph) {
+        this.url = url;
+        this.headline = headline;
+        this.leadParagraph = leadParagraph;
+    }
 
-	
+
+    var apiCallNYT = function(searchTerm, resultPageNumber, NYTapiKey){
+        $.ajax({
+            url: "http://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + searchTerm.replace(' ', '+') + "&page=" + resultPageNumber.toString() + "&api-key=" + NYTapiKey.toString(), 
+            dataType: 'json',
+            success: function(results){
+                var resultsString = JSON.stringify(results),
+                    resultsObject = results,
+                    documentsArray = resultsObject['response']['docs'],
+                    firstLinkURL = resultsObject['response']['docs'][0]['web_url'],
+                    secondLinkURL = resultsObject['response']['docs'][1]['web_url'],
+                    thirdLinkURL = resultsObject['response']['docs'][2]['web_url'],
+                    firstArtLeadParagraph = resultsObject['response']['docs'][0]['lead_paragraph'],
+                    secondArtLeadParagraph = resultsObject['response']['docs'][1]['lead_paragraph'], 
+                    thirdArtLeadParagraph = resultsObject['response']['docs'][2]['lead_paragraph'],
+                    firstArtHeadline = resultsObject['response']['docs'][0]['headline']['main'],
+                    secondArtHeadline = resultsObject['response']['docs'][1]['headline']['main'],     
+                    thirdArtHeadline = resultsObject['response']['docs'][2]['headline']['main'];
+                
+                documentsArray.forEach(function(element, index, array){
+                    if (element['web_url'] == null || element['headline']['main'] == null || element['lead_paragraph'] == null) {
+
+                    } else {
+                    article = new NYTresultsObject(element['web_url'], element['headline']['main'], element['lead_paragraph']);
+                    NYTresultsArray.push(article);
+                    }
+                }); 
+                
+                resultsPrintNYT(NYTresultsArray);
+                NYTresultsArray = [];
+            }
+        });
+    };
+
+    var resultsPrintNYT = function(resultsArray){
+           
+
+
+
+
+
+
+
+
+
+            NYTresultsArray.forEach(function(element, index, array){
+                $("<tr class='NYTresult'><td class='text-left'><a href='" + element.url + "'>" + element.headline +"</a><p>" + element.leadParagraph + "</p></td></tr>").insertBefore('#NYT-last-row');
+            });
+    };
+    
+    var showMoreNYT = function(){
+        if (NYTtimesShown === 1) {
+            $('.show-less-NYT').css("visibility","visible");
+        }
+        apiCallNYT(userSearchTerm,NYTtimesShown,NYTapiKey);
+        NYTtimesShown++;
+    };
+
+    var showLessNYT = function (){
+
+    }
+
 	$('#search-bar').submit(function(e){
-		var newYorkTimesAPIStarter = "http://api.nytimes.com/svc/search/v2/articlesearch.json?";
-		var userSearchTerm = $('#user-search').val();
-		var q = 'fq=' + userSearchTerm;
-		var apiKey = 'api-key=bdcebec4874a5076dbaaa7f2a5f0db3b:3:70140904';
-		var url = newYorkTimesAPIStarter + q + apiKey;
-		$('#cnn').text(userSearchTerm);
-		e.preventDefault();
-		$('#user-search').val('');
-		$.ajax({
-    		url: "http://api.nytimes.com/svc/search/v2/articlesearch.json?fq=" + userSearchTerm + "&facet_field=day_of_week&begin_date=18510918&end_date=20141103&api-key=bdcebec4874a5076dbaaa7f2a5f0db3b:3:70140904",
-    		dataType: 'json',
-    		success: function(results){
-        	var resultsString = JSON.stringify(results);
-        	var resultsObject = results;
-        	var firstLinkURL = JSON.stringify(resultsObject['response']['docs'][0]['web_url']);
-        	var secondLinkURL = JSON.stringify(resultsObject['response']['docs'][1]['web_url']);
-        	var thirdLinkURL = JSON.stringify(resultsObject['response']['docs'][2]['web_url']);
-        	var firstArtLeadParagraph = JSON.stringify(resultsObject['response']['docs'][0]['lead_paragraph']);
-        	var secondArtLeadParagraph = JSON.stringify(resultsObject['response']['docs'][1]['lead_paragraph']); 
-        	var thirdArtLeadParagraph = JSON.stringify(resultsObject['response']['docs'][2]['lead_paragraph']);        
-        //	$('#test-output').text(resultsString);
-    		$('#NYT1').attr("href", firstLinkURL);
-    		$('#NYT2').attr("href", secondLinkURL);
-    		$('#NYT3').attr("href", thirdLinkURL);
-    		$('#NYT1').text(firstArtLeadParagraph);
-    		$('#NYT2').text(secondArtLeadParagraph);
-    		$('#NYT3').text(thirdArtLeadParagraph);
-    		}
-    		
-
-		});
-
-
+        NYTresultsArray = [];
+        $('.NYTresult').remove();
+        userSearchTerm = $('#user-search').val();
+        e.preventDefault();
+        $('#user-search').val('');
+        apiCallNYT(userSearchTerm,0,NYTapiKey);
+        resultsPrintNYT(NYTresultsArray);
+        
+        $('.show-more-NYT').css("visibility","visible");
 	});
 
-	//http://api.nytimes.com/svc/search/v2/articlesearch.response-format?[q=search term&fq=filter-field:(filter-term)&additional-params=values]&api-key=####
-
-
-
-
-
-
-	$('#play-again').click(function(){
-		
-	});
-
-	$('#hint').click(function(){
-		
-	});
-
-
-
-
-	
+    $('.show-more-NYT').click(function() {
+        showMoreNYT();
+    });
 });
