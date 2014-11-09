@@ -11,3 +11,12 @@
 
 }
 
+.results-table-scrolable-container{
+	height: 500px;
+	overflow: auto;
+
+}
+
+.NYT-results-header{
+	height: 0px;
+}

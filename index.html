@@ -19,23 +19,48 @@
 				</div>
 
 				<div class="row">
-					<div id="test-output"class="jumbotron text-center"></div>
-				</div>
-
-				<div class="row">
 					 
 					 <div class="col-md-4 text-center">
-					 	<table class="NYT-results-table table">
+					 	<table id="NYT-results-table-header results-table-header" class="NYT-results-table-header table table-bordered">
 					 		<tr class="NYT-results-header">
-					 			<th class="text-center" >New York Times</th>
+						 		<th class="text-center" >New York Times</th>
+						 	</tr>
+					 	</table> 
+					 	<div class="results-table-scrolable-container" >
+						 	<table id="NYT-results-table" class="NYT-results-table table">						 		
+						 		<tr id='NYT-last-row'>
+						 			<td></td>
+					 			</tr>
+						 	</table>
+					 	</div>
+					</div> 
+
+					 <div class="col-md-4 text-center">
+					 	<table id="G-results-table" class="G-results-table table table table-bordered">
+					 		<tr class="G-results-header results-table-header">
+					 			<th class="text-center" >The Guardian</th>
 					 		</tr>
-					 		
-					 		<tr id='NYT-last-row'>
-					 			<td><span class='show-more-NYT' style="visibility: hidden">show more </span><span class ="show-less-NYT" style="visibility: hidden">show less</span></td>
+					 	</table>
+					 	<table>	
+					 		<tr id='G-last-row'>
+					 			<td></td>
 					 		</tr>
 					 	</table>
 					 </div>
 
+
+					 <div class="col-md-4 text-center">
+					 	<table id="G-results-table" class="G-results-table table table table-bordered">
+					 		<tr class="G-results-header results-table-header">
+					 			<th class="text-center" >Wiki News</th>
+					 		</tr>
+					 	</table>
+					 	<table>	
+					 		<tr id='G-last-row'>
+					 			<td></td>
+					 		</tr>
+					 	</table>
+					 </div>
 				</div>
 
 
