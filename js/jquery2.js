@@ -1,8 +1,9 @@
 $(document).ready(function(){	
-	var userSearchTerm = "";
-    var NYTapiKey = "bdcebec4874a5076dbaaa7f2a5f0db3b:3:70140904";
-    var NYTtimesShown = 1;
-    var NYTresultsArray = [];
+	
+    var userSearchTerm = "",
+        NYTapiKey = "bdcebec4874a5076dbaaa7f2a5f0db3b:3:70140904",
+        NYTtimesShown = 0,
+        NYTresultsArray = [];
 
     function NYTresultsObject(url, headline, leadParagraph, index) {
         this.url = url;
@@ -10,8 +11,6 @@ $(document).ready(function(){
         this.leadParagraph = leadParagraph;
         this.index = index;
     }
-
-
 
     var apiCallNYT = function(searchTerm, resultPageNumber, NYTapiKey){
         $.ajax({
@@ -30,53 +29,35 @@ $(document).ready(function(){
                     }
                 });
                 resultsPrintNYT(NYTresultsArray);
+                NYTtimesShown++;
             }
         });
     };
 
-    var resultsPrintNYT = function(resultsArray, endIndex){
-                if (typeof endIndex === 'undefined') {
-                    endIndex = resultsArray.length;
-                }
-                var startIndex = $('#NYT-results-table tbody').children().length - 2;
-                for (var i = startIndex; i < endIndex; i++){
-
+    var resultsPrintNYT = function(resultsArray){
+                for (var i = 0; i < resultsArray.length; i++){
                   if (resultsArray[i] !== undefined) {
                         $("<tr id='NYTresult"+resultsArray[i].index+"'><td class='text-left NYTresult'><a href='" + resultsArray[i].url + "'>" + resultsArray[i].headline +"</a><p>" + resultsArray[i].leadParagraph + "</p></td></tr>").insertBefore('#NYT-last-row');
                     } 
                   }
     };
     
-    var showMoreNYT = function(){
-            apiCallNYT(userSearchTerm,NYTtimesShown,NYTapiKey);
-            NYTtimesShown++;        
-    };
-
-	
     $('#search-bar').bind('keypress',function (event){
         if (event.keyCode === 13){
             event.preventDefault();
+            NYTtimesShown = 0;
             NYTresultsArray = [];
             $('.NYTresult').remove();
             userSearchTerm = $('#user-search').val();
-            apiCallNYT(userSearchTerm,0,NYTapiKey);
-            resultsPrintNYT(NYTresultsArray);
+            apiCallNYT(userSearchTerm,NYTtimesShown,NYTapiKey);
         }
-});
-
-
-    $('.show-more-NYT').click(function() {
-        showMoreNYT();
     });
 
     $('.results-table-scrolable-container').bind('scroll', function() {
         if($(this).scrollTop() + $(this).innerHeight() >= this.scrollHeight) {
             apiCallNYT(userSearchTerm,NYTtimesShown,NYTapiKey);
-            NYTtimesShown++;
-
         }
     });
-
 
 });
 
