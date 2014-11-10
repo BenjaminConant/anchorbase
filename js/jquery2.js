@@ -33,13 +33,14 @@ $(document).ready(function(){
             }
         });
     };
+    
 
     var resultsPrintNYT = function(resultsArray){
-                for (var i = 0; i < resultsArray.length; i++){
-                  if (resultsArray[i] !== undefined) {
-                        $("<tr id='NYTresult"+resultsArray[i].index+"'><td class='text-left NYTresult'><a href='" + resultsArray[i].url + "'>" + resultsArray[i].headline +"</a><p>" + resultsArray[i].leadParagraph + "</p></td></tr>").insertBefore('#NYT-last-row');
-                    } 
-                  }
+        for (var i = 0; i < resultsArray.length; i++){
+            if (resultsArray[i] !== undefined) {
+                $("<tr id='NYTresult"+resultsArray[i].index+"'><td class='text-left NYTresult'><a href='" + resultsArray[i].url + "'>" + resultsArray[i].headline +"</a><p>" + resultsArray[i].leadParagraph + "</p></td></tr>").insertBefore('#NYT-last-row');
+            } 
+        }
     };
     
     $('#search-bar').bind('keypress',function (event){
