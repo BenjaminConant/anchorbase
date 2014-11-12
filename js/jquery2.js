@@ -84,7 +84,7 @@ $(document).ready(function(){
 
     var apiCallWikipedia = function(searchTerm, resultPageNumber, guardianApiKey){
         $.ajax({
-            url: "http://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrsearch=" +searchTerm.replace(' ', '+') +"&gsrlimit=10&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max",
+            url: "http://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrsearch=" +searchTerm.replace(' ', '+') +"&gsrlimit=10&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&continue=",
             dataType: 'jsonp',
             success: function(results) {
             var results = results;
