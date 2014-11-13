@@ -18,9 +18,9 @@
 					</div>
 				</div>
 
-				<div class="row">
-					 
-					 <div class="col-md-4 text-center">
+				<div class="row" id="sortable">
+					 <div class="row-sort">
+					 <div class="col-md-4 text-center" id="NYT">
 					 	<table id="NYT-results-table-header results-table-header" class="NYT-results-table-header table table-bordered">
 					 		<tr class="NYT-results-header">
 						 		<th class="text-center" >New York Times</th>
@@ -36,7 +36,7 @@
 					 	</div>
 					</div> 
 
-					 <div class="col-md-4 text-center">
+					 <div class="col-md-4 text-center" id="Guardian">
 					 	<table id="G-results-table" class="G-results-table table table table-bordered">
 					 		<tr class="guardian-results-header results-table-header">
 					 			<th class="text-center" >The Guardian</th>
@@ -52,7 +52,7 @@
 					 </div>
 
 
-					 <div class="col-md-4 text-center">
+					 <div class="col-md-4 text-center" id="Wiki">
 					 	<table id="G-results-table" class="G-results-table table table table-bordered">
 					 		<tr class="G-results-header results-table-header">
 					 			<th class="text-center" >Wiki News</th>
@@ -67,7 +67,7 @@
 						 <div>	
 					 </div>
 				</div>
-
+			</div>
 
 				</div>
 				
@@ -75,6 +75,12 @@
 			
 		</div>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" ></script>
+		    <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 		<script type='text/javascript' src='js/jquery2.js'></script>
+		    <script>
+		   $(document).ready(function() {
+		    $('#sortable > .row-sort').sortable();
+		}); 
+    		</script>
 	</body>
 </html>

@@ -16,3 +16,18 @@
 .NYT-results-header{
 	height: 0px;
 }
+
+.NYT-results-header:hover {
+background-color: #f3fbfb;
+}
+.guardian-results-header:hover {
+background-color: #f3fbfb;	
+}
+
+.G-results-header:hover {
+background-color: #f3fbfb;
+}
+
+.form-control:focus {
+  border-color: #D8F2F3;
+ }
