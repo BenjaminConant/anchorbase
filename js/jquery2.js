@@ -1,6 +1,7 @@
 $(document).ready(function(){	
 	
     var userSearchTerm = "",
+        
         NYTapiKey = "bdcebec4874a5076dbaaa7f2a5f0db3b:3:70140904",
         NYTtimesShown = 0,
         NYTresultsArray = [],
@@ -8,7 +9,9 @@ $(document).ready(function(){
         guardianApiKey = "caxj4qkju6y44wsf93aqwkwc",
         guardianTimesShown = 1,
         guardianResultsArray = [],
-        wikipediaResultsArray =[];
+        wikipediaResultsArray =[],
+
+        wikipediaContinueString = "";
 
 
 
@@ -84,7 +87,8 @@ $(document).ready(function(){
 
     var apiCallWikipedia = function(searchTerm, resultPageNumber, guardianApiKey){
         $.ajax({
-            url: "http://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrsearch=" +searchTerm.replace(' ', '+') +"&gsrlimit=10&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&continue=",
+            //"http://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrsearch=" +searchTerm.replace(' ', '+') +"&gsrlimit=10&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&continue=" + wikipediaContinueString
+            url: "http://en.wikipedia.org/w/api.php?format=json&action=query&generator=allpages&gaplimit=10&gapfrom="+ userSearchTerm.replace(' ', '+')+"&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&gapcontinue=" + wikipediaContinueString,
             dataType: 'jsonp',
             success: function(results) {
             var results = results;
@@ -92,6 +96,7 @@ $(document).ready(function(){
             var documentsArray = results['query']['pages'];
             console.log(documentsArray);
             console.log(typeof documentsArray);
+            wikipediaContinueString = results['query-continue']['allpages']['gapcontinue'];
 
             for (var prop in documentsArray) {
                 if (documentsArray.hasOwnProperty(prop)){
@@ -99,7 +104,7 @@ $(document).ready(function(){
                     wikipediaResultsArray.push(article);
                 }
             }
-                resultsPrintWikipedia(wikipediaResultsArray);
+                 resultsPrintWikipedia(wikipediaResultsArray);
                  console.log(wikipediaResultsArray);
             }
         });
@@ -129,6 +134,11 @@ $(document).ready(function(){
             guardianResultsArray = [];
             $('.guardianResult').remove();
 
+            wikipediaContinueString = "";
+            wikipediaResultsArray =[];
+            $('.wikipediaResult').remove();
+
+
             apiCallWikipedia(userSearchTerm);
             apiCallNYT(userSearchTerm,NYTtimesShown,NYTapiKey);
             apiCallGaurdain(userSearchTerm, guardianTimesShown, guardianApiKey);
@@ -144,6 +154,13 @@ $(document).ready(function(){
     $('#guardian-results-table-scrolable-container').bind('scroll', function() {
         if($(this).scrollTop() + $(this).innerHeight() >= this.scrollHeight) {
             apiCallGaurdain(userSearchTerm, guardianTimesShown, guardianApiKey);
+        }
+    });
+
+    $('#wikipedia-results-table-scrolable-container').bind('scroll', function() {
+        if($(this).scrollTop() + $(this).innerHeight() >= this.scrollHeight) {
+            wikipediaResultsArray =[];
+            apiCallWikipedia(userSearchTerm);
         }
     });
 
