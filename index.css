@@ -9,9 +9,15 @@
 
 .results-table-scrolable-container{
 	height: 500px;
-	overflow: auto;
+	overflow: hidden;
 
 }
+
+.results-table-scrolable-container:hover {
+	overflow: auto;
+	overflow-y: scroll;
+}
+
 
 .NYT-results-header{
 	height: 0px;
@@ -31,3 +37,32 @@ background-color: #f3fbfb;
 .form-control:focus {
   border-color: #D8F2F3;
  }
+
+
+ ::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+
+/*div.myautoscroll {
+        height: 40ex;
+        width: 40em;
+        overflow: hidden;
+        border: 1px solid #444;
+        margin: 3em;
+    }
+    div.myautoscroll:hover {
+        overflow: auto;
+    }
+    div.myautoscroll p {
+        padding-right: 16px;
+    }
+    div.myautoscroll:hover p {
+        padding-right: 0px;
+    }*/
