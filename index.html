@@ -1,86 +1,76 @@
 <!DOCTYPE html>
-
 <html>
-	<head>
-		<title>Anchorbase | Find news better</title>
-		<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-		<link rel="stylesheet" type="text/css" href="index.css">
-	</head>
-	<body>
-		<div class="container">
-				<h3 id="anchorbase-logo" class="text-center">Anchorbase</h3>
-				
-				<div class = "row">
-					<div class="col-md-8 col-md-offset-2">
-						<form id="search-bar" class="span4" role="form">
-							<input id="user-search" class="form-control span3" placeholder="Search news better" autocomplete="off">
-						</form>
+<head>
+	<title>Anchorbase | Find news better</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+	<div class="container">
+		<h3 id="anchorbase-logo" class="text-center">Anchorbase</h3>
+		<div class = "row">
+			<div class="col-md-8 col-md-offset-2">
+				<form id="search-bar" class="span4" role="form">
+					<input id="user-search" class="form-control span3" placeholder="Search news better" autocomplete="off">
+				</form>
+			</div>
+		</div>
+		<div class="row" id="sortable">
+			<div class="row-sort">
+				<div class="col-md-4 text-center" id="NYT">
+					<table id="NYT-results-table-header results-table-header" class="NYT-results-table-header table table-bordered">
+						<tr class="NYT-results-header">
+							<th class="text-center" >New York Times</th>
+						</tr>
+					</table> 
+					<div id="NYT-results-table-scrolable-container" class="results-table-scrolable-container" >
+						<table id="NYT-results-table" class="NYT-results-table table">						 		
+							<tr id='NYT-last-row'>
+								<td></td>
+							</tr>
+						</table>
+					</div>
+				</div> 
+				<div class="col-md-4 text-center" id="Guardian">
+					<table id="G-results-table" class="G-results-table table table table-bordered">
+						<tr class="guardian-results-header results-table-header">
+							<th class="text-center" >The Guardian</th>
+						</tr>
+					</table>
+					<div id="guardian-results-table-scrolable-container" class="results-table-scrolable-container" >
+						<table id="guardian-results-table" class="guardian-results-table table">	
+							<tr id='guardian-last-row'>
+								<td></td>
+							</tr>
+						</table>
 					</div>
 				</div>
-
-				<div class="row" id="sortable">
-					 <div class="row-sort">
-					 <div class="col-md-4 text-center" id="NYT">
-					 	<table id="NYT-results-table-header results-table-header" class="NYT-results-table-header table table-bordered">
-					 		<tr class="NYT-results-header">
-						 		<th class="text-center" >New York Times</th>
-						 	</tr>
-					 	</table> 
-					 	<div id="NYT-results-table-scrolable-container" class="results-table-scrolable-container" >
-						 	<table id="NYT-results-table" class="NYT-results-table table">						 		
-						 		
-						 		<tr id='NYT-last-row'>
-						 			<td></td>
-					 			</tr>
-						 	</table>
-					 	</div>
-					</div> 
-
-					 <div class="col-md-4 text-center" id="Guardian">
-					 	<table id="G-results-table" class="G-results-table table table table-bordered">
-					 		<tr class="guardian-results-header results-table-header">
-					 			<th class="text-center" >The Guardian</th>
-					 		</tr>
-					 	</table>
-					 	<div id="guardian-results-table-scrolable-container" class="results-table-scrolable-container" >
-						 	<table id="guardian-results-table" class="guardian-results-table table">	
-						 		<tr id='guardian-last-row'>
-						 			<td></td>
-						 		</tr>
-						 	</table>
+				<div class="col-md-4 text-center" id="Wiki">
+					<table id="G-results-table" class="G-results-table table table table-bordered">
+						<tr class="G-results-header results-table-header">
+							<th class="text-center" >Wikipedia</th>
+						</tr>
+					</table>
+					<div id="wikipedia-results-table-scrolable-container" class="results-table-scrolable-container" >
+						<table id="wikipeida-results-table" class="wikipeida-results-table table">	
+							<tr id='wikipedia-last-row'>
+								<td></td>
+							</tr>
+						</table>
+						<div>	
 						</div>
-					 </div>
-
-
-					 <div class="col-md-4 text-center" id="Wiki">
-					 	<table id="G-results-table" class="G-results-table table table table-bordered">
-					 		<tr class="G-results-header results-table-header">
-					 			<th class="text-center" >Wikipedia</th>
-					 		</tr>
-					 	</table>
-					 	<div id="wikipedia-results-table-scrolable-container" class="results-table-scrolable-container" >
-						 	<table id="wikipeida-results-table" class="wikipeida-results-table table">	
-						 		<tr id='wikipedia-last-row'>
-						 			<td></td>
-						 		</tr>
-						 	</table>
-						 <div>	
-					 </div>
+					</div>
 				</div>
-			</div>
-
-				</div>
-				
-				
-			
+			</div>	
 		</div>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" ></script>
-		    <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-		<script type='text/javascript' src='js/jquery.js'></script>
-		    <script>
-		   $(document).ready(function() {
-		    $('#sortable > .row-sort').sortable();
-		}); 
-    		</script>
-	</body>
+	</div>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" ></script>
+	<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+	<script type='text/javascript' src='js/jquery.js'></script>
+	<script>
+	$(document).ready(function() {
+		$('#sortable > .row-sort').sortable();
+	}); 
+	</script>
+</body>
 </html>
